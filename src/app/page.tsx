@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ProductCard from '@/components/ProductCard'
+import LoginPrompt from '@/components/LoginPrompt'
 import { CartProvider } from '@/contexts/CartContext'
 
 export default function Home() {
@@ -26,8 +27,8 @@ export default function Home() {
         <main className="container mx-auto px-4 py-8 pb-20">
 
           <div className="max-w-6xl mx-auto">
-
-            {/* 湯類／藥膳飲品列表 */}
+            <LoginPrompt>
+              {/* 湯類／藥膳飲品列表 */}
             <div className="bg-white rounded-lg shadow-md p-8">
               <h3 className="text-xl font-semibold mb-6">湯類／藥膳飲品列表</h3>
 
@@ -65,6 +66,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
+            </LoginPrompt>
           </div>
         </main>
         <Footer />

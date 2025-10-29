@@ -1,8 +1,45 @@
 'use client'
 
+import { signIn, signOut, useSession } from 'next-auth/react'
+
 export default function HeaderLoginButton() {
+  const { data: session, status } = useSession()
+
+  if (status === 'loading') {
+    return (
+      <div className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg text-sm">
+        載入中...
+      </div>
+    )
+  }
+
+  if (session) {
+    return (
+      <div className="flex items-center gap-3">
+        {session.user?.image && (
+          <img
+            src={session.user.image}
+            alt="Profile"
+            className="w-8 h-8 rounded-full"
+          />
+        )}
+        <div className="flex flex-col">
+          <span className="text-white text-sm font-medium">
+            {session.user?.name}
+          </span>
+        </div>
+        <button
+          onClick={() => signOut()}
+          className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-500 transition-colors"
+        >
+          登出
+        </button>
+      </div>
+    )
+  }
+
   const handleGoogleSignIn = () => {
-    alert('Demo模式：請先設定 Google OAuth 憑證來啟用真實登入功能')
+    signIn('google')
   }
 
   return (
